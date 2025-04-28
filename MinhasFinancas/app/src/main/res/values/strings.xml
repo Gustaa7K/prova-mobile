@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Minhas Finanças</string>
+    <string name="adicionar_gasto">Adicionar Gasto</string>
+    <string name="resumo_categoria">Resumo por Categoria</string>
+    <string name="salvar">Salvar</string>
+    <string name="descricao">Descrição</string>
+    <string name="valor">Valor (R$)</string>
+    <string name="categoria">Categoria</string>
+    <string name="data">Data</string>
+    <string name="resumo">Resumo</string>
+</resources>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cores principais -->
+    <color name="colorPrimary">#FF9800</color> <!-- Laranja vibrante -->
+    <color name="colorPrimaryDark">#F57C00</color> <!-- Laranja escuro -->
+    <color name="colorAccent">#FFC107</color> <!-- Amarelo -->
+
+    <!-- Fundo e texto -->
+    <color name="background">#FAFAFA</color>
+    <color name="textPrimary">#212121</color>
+    <color name="textSecondary">#757575</color>
+
+    <!-- Outros -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="divider">#BDBDBD</color>
+</resources>
