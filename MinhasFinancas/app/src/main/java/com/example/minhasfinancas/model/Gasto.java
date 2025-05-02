@@ -1,66 +1,49 @@
 package com.example.minhasfinancas.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class Gasto implements Parcelable {
+@Entity
+public class Gasto {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String descricao;
     private double valor;
-    private String categoria;
     private String data;
+    private String categoria;
 
-    public Gasto(String descricao, double valor, String categoria, String data) {
-        this.descricao = descricao;
-        this.valor = valor;
-        this.categoria = categoria;
-        this.data = data;
+    public int getId() {
+        return id;
     }
-
-    protected Gasto(Parcel in) {
-        descricao = in.readString();
-        valor = in.readDouble();
-        categoria = in.readString();
-        data = in.readString();
+    public void setId(int id) {
+        this.id = id;
     }
-
-    public static final Creator<Gasto> CREATOR = new Creator<Gasto>() {
-        @Override
-        public Gasto createFromParcel(Parcel in) {
-            return new Gasto(in);
-        }
-
-        @Override
-        public Gasto[] newArray(int size) {
-            return new Gasto[size];
-        }
-    };
 
     public String getDescricao() {
         return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public double getValor() {
         return valor;
     }
-
-    public String getCategoria() {
-        return categoria;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
     public String getData() {
         return data;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(descricao);
-        parcel.writeDouble(valor);
-        parcel.writeString(categoria);
-        parcel.writeString(data);
+    public String getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 }

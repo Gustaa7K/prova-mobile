@@ -1,11 +1,32 @@
 <resources>
+    <!-- Nome do aplicativo -->
     <string name="app_name">Minhas Finanças</string>
+
+    <!-- Strings para o Cadastro de Gasto -->
     <string name="adicionar_gasto">Adicionar Gasto</string>
-    <string name="resumo_categoria">Resumo por Categoria</string>
-    <string name="salvar">Salvar</string>
     <string name="descricao">Descrição</string>
-    <string name="valor">Valor (R$)</string>
-    <string name="categoria">Categoria</string>
+    <string name="valor">Valor</string>
     <string name="data">Data</string>
-    <string name="resumo">Resumo</string>
+    <string name="categoria">Categoria</string>
+    <string name="salvar">Salvar</string>
+    <string name="por_favor_preencha_todos_os_campos">Por favor, preencha todos os campos</string>
+    <string name="valor_invalido">Valor inválido</string>
+
+    <!-- Strings para outras partes do aplicativo -->
+    <string name="titulo_resumo">Resumo</string>
+    <string name="gasto_total">Gasto Total</string>
+
+    <!-- Nova string adicionada -->
+    <string name="resumo_categoria">Resumo por Categoria</string>
+
+    <!-- Array de categorias para o Spinner -->
+    <array name="categorias">
+        <item>Alimentação</item>
+        <item>Transporte</item>
+        <item>Moradia</item>
+        <item>Saúde</item>
+        <item>Educação</item>
+        <item>Entretenimento</item>
+        <item>Outros</item>
+    </array>
 </resources>

@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    // Se estiver usando Kotlin, adicione o plugin KAPT aqui
+    // id 'kotlin-kapt'
 }
 
 android {
@@ -32,11 +34,18 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    // Dependência do Room
+    implementation("androidx.room:room-runtime:2.7.1")
+
+    // Se estiver usando Kotlin, use kapt ao invés de annotationProcessor
+    // kapt "androidx.room:room-compiler:2.7.1"
+    annotationProcessor("androidx.room:room-compiler:2.7.1")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

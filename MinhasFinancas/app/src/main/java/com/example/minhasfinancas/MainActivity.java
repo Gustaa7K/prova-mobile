@@ -5,52 +5,60 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.minhasfinancas.adapter.GastoAdapter;
 import com.example.minhasfinancas.model.Gasto;
-import java.util.ArrayList;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
-import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Gasto> listaGastos = new ArrayList<>();
-    private GastoAdapter adapter;
     private RecyclerView recyclerView;
-    private Button btnNovo, btnResumo;
+    private GastoAdapter adapter;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = AppDatabase.getInstance(this);
+
         recyclerView = findViewById(R.id.recyclerView);
-        btnNovo = findViewById(R.id.btnNovo);
-        btnResumo = findViewById(R.id.btnResumo);
-
-        adapter = new GastoAdapter(listaGastos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
 
-        btnNovo.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, CadastroGastoActivity.class);
-            startActivityForResult(i, 1);
-        });
+        FloatingActionButton btnAdd = findViewById(R.id.btnAdd);
+        FloatingActionButton btnResumo = findViewById(R.id.btnResumo);
 
-        btnResumo.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, ResumoCategoriaActivity.class);
-            i.putParcelableArrayListExtra("gastos", new ArrayList<>(listaGastos));
-            startActivity(i);
-        });
+        btnAdd.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, CadastroGastoActivity.class))
+        );
+
+        btnResumo.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ResumoCategoriaActivity.class))
+        );
+
+        carregarGastos();
+    }
+
+    private void carregarGastos() {
+        new Thread(() -> {
+            List<Gasto> lista = db.gastoDao().listarTodos();
+            runOnUiThread(() -> {
+                if (adapter == null) {
+                    adapter = new GastoAdapter(lista);
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    adapter.updateLista(lista);  // Atualiza a lista no adapter
+                }
+            });
+        }).start();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            Gasto gasto = data.getParcelableExtra("gasto");  // Usando getParcelableExtra
-            listaGastos.add(gasto);
-            adapter.notifyDataSetChanged();
-        }
+    protected void onResume() {
+        super.onResume();
+        carregarGastos();
     }
 }
